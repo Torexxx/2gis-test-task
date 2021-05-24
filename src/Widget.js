@@ -21,6 +21,18 @@ const Widget = () => {
         });
     }
 
+    const filteredBooksInProgress = books
+        .filter(book => 'finish-reading' === bookStatus[book.id])
+        .map(book => <Book  key = {book.id} book={book} setStatusHandler={setStatusHandler} status = {'finish reading'} />);  // to read
+
+    const filteredBooksDone = books
+        .filter(book => 'return-in-to-read' === bookStatus[book.id])
+        .map(book => <Book  key = {book.id} book={book} setStatusHandler={setStatusHandler} status = {'return-in-to-read'} />); // In progress
+
+    const filteredBooksToRead = books
+        .filter(book => bookStatus[book.id] === undefined)
+        .map(book => <Book key = {book.id} book={book} setStatusHandler={setStatusHandler} status = {'start reading'} />); // Done
+
   return (
     <div className="Widget">
       <div className="widget-wrapper">
@@ -37,32 +49,13 @@ const Widget = () => {
               <label htmlFor="tab-btn-3">Done</label>
 
               <div id="content-1">
-                  {books
-                      .filter(book => bookStatus[book.id] === undefined)
-                      .map(book => <Book book={book} setStatusHandler={setStatusHandler} status = {'start reading'} />)
-                  }
+                  {filteredBooksToRead.length ? filteredBooksToRead : 'List is empty'}
               </div>
-
               <div id="content-2">
-                  {books
-                      .filter(book => 'finish-reading' === bookStatus[book.id])
-                      .map(book => <Book book={book} setStatusHandler={setStatusHandler} status = {'finish reading'} />).length
-                  ?
-                  books
-                      .filter(book => 'finish-reading' === bookStatus[book.id])
-                      .map(book => <Book book={book} setStatusHandler={setStatusHandler} status = {'finish reading'} />) : 'List is empty'
-                  }
+                  {filteredBooksInProgress.length ? filteredBooksInProgress : 'List is empty'}
               </div>
-
               <div id="content-3">
-                  {books
-                      .filter(book => 'return-in-to-read' === bookStatus[book.id])
-                      .map(book => <Book book={book} setStatusHandler={setStatusHandler} status = {'return-in-to-read'} />).length
-                      ?
-                      books
-                          .filter(book => 'return-in-to-read' === bookStatus[book.id])
-                          .map(book => <Book book={book} setStatusHandler={setStatusHandler} status = {'return-in-to-read'} />) : 'List is empty'
-                  }
+                  {filteredBooksDone.length ? filteredBooksDone : 'List is empty'}
               </div>
           </div>
       </div>

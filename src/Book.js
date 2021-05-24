@@ -2,7 +2,6 @@ import React from "react";
 
 const Book = ({book, setStatusHandler, status}) => {
 
-
     return (
         <div key={book.id} className='book'>
             <div className="book-header">
@@ -13,7 +12,7 @@ const Book = ({book, setStatusHandler, status}) => {
 
                 { status === 'start reading' &&
                 <div onClick={() => setStatusHandler({[book.id]: 'finish-reading'})}
-                     className='book-status'><a href>{status === 'start reading' ? 'start reading' : status === 'finish reading' ? 'finish reading' : 'return in to read'}</a>
+                     className='book-status'><a>{status === 'start reading' ? 'start reading' : status === 'finish reading' ? 'finish reading' : 'return in to read'}</a>
                 </div>
                 }
                 { status === 'finish reading' &&
@@ -27,17 +26,13 @@ const Book = ({book, setStatusHandler, status}) => {
                 </div>
                 }
 
-
-
-
-
             </div>
             <div className="book-description">
                 <div>{book.description}</div>
             </div>
 
             <div className="book-tags">
-                {book.tags.map(tag => <div className="book-tag"> #{tag}</div>)}
+                {book.tags.map(tag => <div key={performance.now() + Math.random()} className="book-tag"> #{tag}</div>)}
             </div>
         </div>
     )
