@@ -1,6 +1,6 @@
 import React from "react";
 
-const Book = ({book, setStatusHandler, currentStatus}) => {
+const Book = ({book, setStatusHandler, currentStatus, onTagChangeHandler}) => {
 
     const toggleStatusLink = <a>{currentStatus === 'to-read' ? 'start reading' : currentStatus === 'in-progress' ? 'finish reading' : 'return in to read'}</a>;
 
@@ -34,7 +34,7 @@ const Book = ({book, setStatusHandler, currentStatus}) => {
             </div>
 
             <div className="book-tags">
-                {book.tags.map(tag => <div key={performance.now() + Math.random()} className="book-tag"> #{tag}</div>)}
+                {book.tags.map(tag => <div onClick={() => onTagChangeHandler(tag)} key={performance.now() + Math.random()} className="book-tag"> #{tag}</div>)}
             </div>
         </div>
     )

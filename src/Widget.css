@@ -40,7 +40,8 @@
   display: flex;
   flex-wrap: wrap;
 }
-.book-tag {
+.book-tag,
+.tags-block{
   background: silver;
   padding: 5px;
   margin-right: 10px;
@@ -62,6 +63,10 @@
   border: 1px solid #e0e0e0;
   padding: 10px 15px;
   font-size: 16px;
+}
+
+.tags-block {
+  display: block !important;
 }
 
 #tab-btn-to-read:checked~#to-read,
