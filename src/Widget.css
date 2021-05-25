@@ -1,13 +1,7 @@
-.Widget {
-  /*text-align: center;*/
-}
 .widget-wrapper {
-  /*max-width: 1280px;*/
   margin: 0 auto;
   min-width: 480px;
-  /*border: 1px solid #eee;*/
   max-width: 500px;
-
   padding: 10px;
 }
 
@@ -28,6 +22,7 @@
 .book-status {
   text-decoration: underline;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .book-status a {
@@ -52,14 +47,8 @@
   margin-top: 10px;
 }
 
-
-
-
-/*// tabs*/
-
 .tabs {
   font-size: 0;
-  /*max-width: 350px;*/
   margin-left: auto;
   margin-right: auto;
 }
@@ -75,9 +64,9 @@
   font-size: 16px;
 }
 
-#tab-btn-1:checked~#content-1,
-#tab-btn-2:checked~#content-2,
-#tab-btn-3:checked~#content-3 {
+#tab-btn-to-read:checked~#to-read,
+#tab-btn-in-progress:checked~#in-progress,
+#tab-btn-done:checked~#done {
   display: block;
 }
 

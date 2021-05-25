@@ -21,40 +21,35 @@ const Widget = () => {
         });
     }
 
-    const filteredBooksInProgress = books
-        .filter(book => 'finish-reading' === bookStatus[book.id])
-        .map(book => <Book  key = {book.id} book={book} setStatusHandler={setStatusHandler} status = {'finish reading'} />);  // to read
-
-    const filteredBooksDone = books
-        .filter(book => 'return-in-to-read' === bookStatus[book.id])
-        .map(book => <Book  key = {book.id} book={book} setStatusHandler={setStatusHandler} status = {'return-in-to-read'} />); // In progress
-
     const filteredBooksToRead = books
         .filter(book => bookStatus[book.id] === undefined)
-        .map(book => <Book key = {book.id} book={book} setStatusHandler={setStatusHandler} status = {'start reading'} />); // Done
+        .map(book => <Book key = {book.id} book={book} setStatusHandler={setStatusHandler} currentStatus = {'to-read'} />);
+
+    const filteredBooksInProgress = books
+        .filter(book => 'in-progress' === bookStatus[book.id])
+        .map(book => <Book  key = {book.id} book={book} setStatusHandler={setStatusHandler} currentStatus = {'in-progress'} />);
+
+    const filteredBooksDone = books
+        .filter(book => 'done' === bookStatus[book.id])
+        .map(book => <Book  key = {book.id} book={book} setStatusHandler={setStatusHandler} currentStatus = {'done'} />);
 
   return (
     <div className="Widget">
       <div className="widget-wrapper">
-
           <div className="tabs">
-
-              <input type="radio" name="tab-btn" id="tab-btn-1" value="" defaultChecked />
-              <label htmlFor="tab-btn-1">To read </label>
-
-              <input type="radio" name="tab-btn" id="tab-btn-2" value=""/>
-              <label htmlFor="tab-btn-2">In progress</label>
-
-              <input type="radio" name="tab-btn" id="tab-btn-3" value=""/>
-              <label htmlFor="tab-btn-3">Done</label>
-
-              <div id="content-1">
+              <input type="radio" name="tab-btn" id="tab-btn-to-read" value="" defaultChecked />
+              <label htmlFor="tab-btn-to-read">To read ({filteredBooksToRead.length}) </label>
+              <input type="radio" name="tab-btn" id="tab-btn-in-progress" value=""/>
+              <label htmlFor="tab-btn-in-progress">In progress ({filteredBooksInProgress.length})</label>
+              <input type="radio" name="tab-btn" id="tab-btn-done" value=""/>
+              <label htmlFor="tab-btn-done">Done ({filteredBooksDone.length})</label>
+              <div id="to-read">
                   {filteredBooksToRead.length ? filteredBooksToRead : 'List is empty'}
               </div>
-              <div id="content-2">
+              <div id="in-progress">
                   {filteredBooksInProgress.length ? filteredBooksInProgress : 'List is empty'}
               </div>
-              <div id="content-3">
+              <div id="done">
                   {filteredBooksDone.length ? filteredBooksDone : 'List is empty'}
               </div>
           </div>

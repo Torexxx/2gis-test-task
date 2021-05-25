@@ -1,6 +1,8 @@
 import React from "react";
 
-const Book = ({book, setStatusHandler, status}) => {
+const Book = ({book, setStatusHandler, currentStatus}) => {
+
+    const toggleStatusLink = <a>{currentStatus === 'to-read' ? 'start reading' : currentStatus === 'in-progress' ? 'finish reading' : 'return in to read'}</a>;
 
     return (
         <div key={book.id} className='book'>
@@ -10,19 +12,19 @@ const Book = ({book, setStatusHandler, status}) => {
                     <div className="book-title">{book.title}</div>
                 </div>
 
-                { status === 'start reading' &&
-                <div onClick={() => setStatusHandler({[book.id]: 'finish-reading'})}
-                     className='book-status'><a>{status === 'start reading' ? 'start reading' : status === 'finish reading' ? 'finish reading' : 'return in to read'}</a>
+                { currentStatus === 'to-read' &&
+                <div onClick={() => setStatusHandler({[book.id]: 'in-progress'})} className='book-status'>
+                    {toggleStatusLink}
                 </div>
                 }
-                { status === 'finish reading' &&
-                <div onClick={() => setStatusHandler({[book.id]: 'return-in-to-read'})}
-                     className='book-status'><a href>{status === 'start reading' ? 'start reading' : status === 'finish reading' ? 'finish reading' : 'return in to read'}</a>
+                { currentStatus === 'in-progress' &&
+                <div onClick={() => setStatusHandler({[book.id]: 'done'})} className='book-status'>
+                    {toggleStatusLink}
                 </div>
                 }
-                { status === 'return-in-to-read' &&
-                <div onClick={() => setStatusHandler({[book.id]: 'finish-reading'})}
-                     className='book-status'><a href>{status === 'start reading' ? 'start reading' : status === 'finish reading' ? 'finish reading' : 'return in to read'}</a>
+                { currentStatus === 'done' &&
+                <div onClick={() => setStatusHandler({[book.id]: 'in-progress'})} className='book-status'>
+                    {toggleStatusLink}
                 </div>
                 }
 
